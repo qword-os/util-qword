@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     char *device = NULL;
     char *mount_point = NULL;
 
-    while ((option = getopt(argc, argv, "Vht:c:o:")) != -1) {
+    while ((option = getopt(argc, argv, "Vht:")) != -1) {
         switch (option) {
             case 'V':
                 puts("mount from util-qword");
@@ -29,6 +29,7 @@ int main(int argc, char *argv[]) {
                 puts("\t-V\tPrints the version of the program");
                 puts("\t-h\tDisplays this help message");
                 puts("\t-t\tTarget filesystem type to mount");
+                exit(0);
                 break;
             case 't':
                 type = strdup(optarg);
@@ -50,7 +51,7 @@ int main(int argc, char *argv[]) {
     // Start the actual program.
     printf("Mounting '%s' into '%s' with type '%s'\n", device, mount_point, type);
     if (mount(device, mount_point, type, 0, 0)) {
-        error("Couldn't mount device");
+        error("Couldn't mount device (syscall returned -1)");
     }
 
     // Free structures.

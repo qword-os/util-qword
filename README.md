@@ -4,3 +4,4 @@ utils.
 
 ## Implemented utils
 - `mount`.
+- `qfetch`, a `screenfetch` clone for qword in C.
