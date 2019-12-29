@@ -2,7 +2,7 @@
 SOURCEDIR := src
 
 # User options.
-PREFIX  = /usr/bin
+PREFIX  = /usr
 DESTDIR =
 
 CC = gcc
@@ -20,8 +20,8 @@ clean:
 	rm -f mount
 
 install:
-	install -d $(PREFIX)/bin
-	install -s mount $(DESTDIR)$(PREFIX)/mount
+	install -d $(DESTDIR)$(PREFIX)/bin
+	install -s mount $(DESTDIR)$(PREFIX)/bin
 
 uninstall:
-	rm -f $(DESTDIR)$(PREFIX)/mount
+	rm -f $(DESTDIR)$(PREFIX)/bin/mount
