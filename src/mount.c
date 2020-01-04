@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
-#include <util.h>
+#include <util/messages.h>
 #include <qword/mount.h>
 
 // Command line parsing.
