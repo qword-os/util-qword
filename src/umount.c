@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Start the actual program.
-    printf("Unmounting '%s'", mount_point);
+    printf("Unmounting '%s'\n", mount_point);
     if (umount(mount_point)) {
         error("Couldn't unmount device (syscall returned -1)");
     }
