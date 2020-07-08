@@ -12,28 +12,22 @@ int main(int argc, char *argv[]) {
     // First, parse the command line.
     opterr = 0; // Disable getopt warnings, we will use our own.
     int option = 0;
-    char *type = NULL;
-    char *device = NULL;
     char *mount_point = NULL;
 
-    while ((option = getopt(argc, argv, "Vht:")) != -1) {
+    while ((option = getopt(argc, argv, "Vh")) != -1) {
         switch (option) {
             case 'V':
-                puts("mount from util-qword");
+                puts("umount from util-qword");
                 exit(0);
                 break;
             case 'h':
                 puts("Usage:");
-                printf("\t%s [options] <device> <destination>\n", argv[0]);
+                printf("\t%s <mount point>\n", argv[0]);
                 puts("");
                 puts("Options:");
                 puts("\t-V\tPrints the version of the program");
                 puts("\t-h\tDisplays this help message");
-                puts("\t-t\tTarget filesystem type to mount");
                 exit(0);
-                break;
-            case 't':
-                type = strdup(optarg);
                 break;
             default:
                 error("Unknown option");
@@ -41,20 +35,16 @@ int main(int argc, char *argv[]) {
     }
 
     // Device and mount point.
-    device = argv[optind];
-    mount_point = argv[optind + 1];
+    mount_point = argv[optind];
 
     // Check values.
-    if (!type || !device || !mount_point) {
+    if (!mount_point) {
         error("Invalid program flags! Have you tried '-h'?");
     }
 
     // Start the actual program.
-    printf("Mounting '%s' into '%s' with type '%s'\n", device, mount_point, type);
-    if (mount(device, mount_point, type, 0, 0)) {
-        error("Couldn't mount device (syscall returned -1)");
+    printf("Unmounting '%s'", mount_point);
+    if (umount(mount_point)) {
+        error("Couldn't unmount device (syscall returned -1)");
     }
-
-    // Free structures.
-    free(type);
 }
